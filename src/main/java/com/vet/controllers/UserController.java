@@ -3,6 +3,7 @@ package com.vet.controllers;
 import com.vet.entities.UserEntity;
 import com.vet.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,9 +16,12 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/")
-    public List<UserEntity> getAllUsers() {
-        return userService.getAllUsers();
+    @GetMapping
+    public Page<UserEntity> getAllUsers(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "name,asc") String[] sort) {
+        return userService.getAllUsers(page, size, sort);
     }
 
     @GetMapping("/{id}")
@@ -25,7 +29,17 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping("/")
+    @GetMapping("/filter")
+    public List<UserEntity> getUsersByFilter(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String phone) {
+        System.out.println("name: " + name);
+        return userService.getUsersByFilter(name, lastName, email, phone);
+    }
+
+    @PostMapping
     public UserEntity saveUser(@RequestBody UserEntity userEntity) {
         return userService.saveUser(userEntity);
     }

@@ -31,28 +31,28 @@ public class UserEntity {
     @NotNull @Size(max = 20) @Column(unique = true)
     private String phone;
 
-    @NotNull @Size(max = 20) @Column(unique = true)
+    @NotNull @Size(max = 20)
     private String city;
 
-    @NotNull @Size(max = 20) @Column(unique = true)
+    @NotNull @Size(max = 20)
     private String municipality;
 
-    @NotNull @Size(max = 20) @Column(unique = true)
+    @NotNull @Size(max = 20)
     private String street;
 
     @Column(unique = true)
     private int number;
 
-    @NotNull @Size(max = 100) @Column(unique = true)
+    @NotNull @Size(max = 100)
     private String password;
 
-    @NotNull @Size(max = 40) @Column(unique = true)
+    @NotNull @Size(max = 40)
     private String name;
 
-    @NotNull @Size(max = 40) @Column(unique = true)
+    @NotNull @Size(max = 40)
     private String lastName;
 
-    @NotNull @Column(unique = true)
+    @NotNull
     private boolean enabled;
 
     @Past @NotNull

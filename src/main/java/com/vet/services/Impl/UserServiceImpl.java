@@ -4,6 +4,9 @@ import com.vet.entities.UserEntity;
 import com.vet.repositories.UserRepository;
 import com.vet.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +18,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
-    public List<UserEntity> getAllUsers() {
-        return userRepository.findAll();
+    public Page<UserEntity> getAllUsers(int page, int size, String[] sort) {
+        Sort sortable = Sort.by(sort[0]);
+        PageRequest pageable = PageRequest.of(page, size, sortable);
+
+        return userRepository.findAll(pageable);
     }
 
     public UserEntity saveUser(UserEntity userEntity) {
@@ -41,7 +47,11 @@ public class UserServiceImpl implements UserService {
     }
 
     public Optional<UserEntity> getUserById(int id) {
-        return Optional.ofNullable(userRepository.findById((long) id).orElse(null));
+        return userRepository.findById((long) id);
+    }
+
+    public List<UserEntity> getUsersByFilter(String name, String lastName, String email, String phone) {
+        return userRepository.findAllByFilter(name, lastName, email, phone);
     }
 
     public Optional<UserEntity> deleteUserById(int id) {

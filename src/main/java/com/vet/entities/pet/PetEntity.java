@@ -23,32 +23,32 @@ public class PetEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull @Size(max = 40) @Column(unique = true)
+    @NotNull @Size(max = 40)
     private String name;
 
-    @NotNull @Size(max = 40) @Column(unique = true)
+    @NotNull @Size(max = 40)
     private String lastName;
 
-    @NotNull @Size(max = 20) @Column(unique = true)
+    @NotNull @Size(max = 20)
     private String sex;
 
     @NotNull @Past
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date birthdate;
 
-    @NotNull @Size(max = 15) @Column(unique = true)
+    @NotNull @Size(max = 15)
     private String specie;
 
-    @NotNull @Size(max = 15) @Column(unique = true)
+    @NotNull @Size(max = 15)
     private String race;
 
-    @NotNull @Size(max = 15) @Column(unique = true)
+    @NotNull @Size(max = 15)
     private String color;
 
     @NotNull @Column(unique = true)
     private float weight;
 
-    @NotNull @Size(max = 10) @Column(unique = true)
+    @NotNull @Size(max = 10)
     private String size;
 
     @NotNull @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")

@@ -16,7 +16,7 @@ public class PetController {
     @Autowired
     PetService petService;
 
-    @GetMapping("/")
+    @GetMapping
     public List<PetEntity> getAllPets() {
         return petService.getAllPets();
     }
@@ -26,7 +26,7 @@ public class PetController {
         return petService.getPetById(id);
     }
 
-    @PostMapping("/")
+    @PostMapping
     public PetEntity savePet(@RequestBody PetEntity petEntity) throws ParseException {
         return petService.savePet(petEntity);
     }
