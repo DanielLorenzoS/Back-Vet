@@ -4,6 +4,7 @@ import com.vet.entities.UserEntity;
 import com.vet.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,13 +31,15 @@ public class UserController {
     }
 
     @GetMapping("/filter")
-    public List<UserEntity> getUsersByFilter(
+    public Page<UserEntity> getUsersByFilter(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String lastName,
             @RequestParam(required = false) String email,
-            @RequestParam(required = false) String phone) {
-        System.out.println("name: " + name);
-        return userService.getUsersByFilter(name, lastName, email, phone);
+            @RequestParam(required = false) String phone,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "name,asc") String[] sort) {
+        return userService.getAllUsersByFilter(name, lastName, email, phone, page, size, sort);
     }
 
     @PostMapping

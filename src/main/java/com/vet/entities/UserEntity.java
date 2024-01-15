@@ -28,7 +28,7 @@ public class UserEntity {
     @NotNull @Email @Size(max = 40) @Column(unique = true)
     private String email;
 
-    @NotNull @Size(max = 20) @Column(unique = true)
+    @NotNull @Size(max = 12) @Column(unique = true)
     private String phone;
 
     @NotNull @Size(max = 20)
@@ -40,8 +40,7 @@ public class UserEntity {
     @NotNull @Size(max = 20)
     private String street;
 
-    @Column(unique = true)
-    private int number;
+    private Integer number;
 
     @NotNull @Size(max = 100)
     private String password;

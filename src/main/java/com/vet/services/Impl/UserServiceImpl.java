@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,10 +51,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById((long) id);
     }
 
-    public List<UserEntity> getUsersByFilter(String name, String lastName, String email, String phone) {
-        return userRepository.findAllByFilter(name, lastName, email, phone);
-    }
-
     public Optional<UserEntity> deleteUserById(int id) {
         Optional<UserEntity> user = userRepository.findById((long) id);
         if (user.isPresent()) {
@@ -61,6 +58,29 @@ public class UserServiceImpl implements UserService {
             return user;
         } else {
             return Optional.empty();
+        }
+    }
+
+    public Page<UserEntity> getAllUsersByFilter(String name,
+                                              String lastName,
+                                              String email,
+                                              String phone,
+                                              int page,
+                                              int size,
+                                              String[] sort) {
+        Sort sortable = Sort.by(sort[0]);
+        PageRequest pageable = PageRequest.of(page, size, sortable);
+        if (name != null) {
+            System.out.println(userRepository.findAllByNameStartingWith(name, pageable));
+            return userRepository.findAllByNameStartingWith(name, pageable);
+        } else if (lastName != null) {
+            return userRepository.findAllByLastNameStartingWith(lastName, pageable);
+        } else if (email != null) {
+            return userRepository.findAllByEmailStartingWith(email, pageable);
+        } else if (phone != null) {
+            return userRepository.findAllByPhoneStartingWith(phone, pageable);
+        } else {
+            return userRepository.findAll(pageable);
         }
     }
 }
