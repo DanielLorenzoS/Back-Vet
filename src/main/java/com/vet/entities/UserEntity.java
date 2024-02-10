@@ -62,4 +62,8 @@ public class UserEntity {
     @JsonManagedReference(value = "user-pets")
     private List<PetEntity> pets;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "bill_user_id")
+    private List<BillEntity> bills;
+
 }

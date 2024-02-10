@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -67,4 +68,9 @@ public class ProductEntity {
     @Size(max = 50)
     private String qrCode;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = BillEntity.class)
+    @JoinTable(name = "bill_products",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "bill_id"))
+    private List<BillEntity> bills;
 }
