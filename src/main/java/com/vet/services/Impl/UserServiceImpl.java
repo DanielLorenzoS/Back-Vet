@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(userEntity);
     }
 
-    public Optional<UserEntity> editUser(UserEntity userEntity) {
+    public Optional<UserEntity> updateUser(UserEntity userEntity) {
         Optional<UserEntity> user = userRepository.findById(userEntity.getId());
         if (user.isPresent()) {
             user.get().setName(userEntity.getName());

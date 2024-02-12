@@ -18,20 +18,20 @@ public class UserController {
     UserService userService;
 
     @GetMapping
-    public Page<UserEntity> getAllUsers(
+    public ResponseEntity<Page<UserEntity>> getAllUsers(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
             @RequestParam(defaultValue = "name,asc") String[] sort) {
-        return userService.getAllUsers(page, size, sort);
+        return ResponseEntity.ok(userService.getAllUsers(page, size, sort));
     }
 
     @GetMapping("/{id}")
-    public Optional<UserEntity> getUserById(@PathVariable int id) {
-        return userService.getUserById(id);
+    public ResponseEntity<Optional<UserEntity>> getUserById(@PathVariable int id) {
+        return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @GetMapping("/filter")
-    public Page<UserEntity> getUsersByFilter(
+    public ResponseEntity<Page<UserEntity>> getUsersByFilter(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String lastName,
             @RequestParam(required = false) String email,
@@ -40,21 +40,21 @@ public class UserController {
             @RequestParam(defaultValue = "5") int size,
             @RequestParam(defaultValue = "name,asc") String[] sort) {
         System.out.println(sort[0] );
-        return userService.getAllUsersByFilter(name, lastName, email, phone, page, size, sort);
+        return ResponseEntity.ok(userService.getAllUsersByFilter(name, lastName, email, phone, page, size, sort));
     }
 
     @PostMapping
-    public UserEntity saveUser(@RequestBody UserEntity userEntity) {
-        return userService.saveUser(userEntity);
+    public ResponseEntity<UserEntity> addUser(@RequestBody UserEntity userEntity) {
+        return ResponseEntity.ok(userService.saveUser(userEntity));
     }
 
     @PutMapping("/{id}")
-    public Optional<UserEntity> editUser(@PathVariable int id, @RequestBody UserEntity userEntity) {
-        return userService.editUser(userEntity);
+    public ResponseEntity<UserEntity> updateUser(@PathVariable int id, @RequestBody UserEntity userEntity) {
+        return ResponseEntity.ok(userService.updateUser(userEntity).get());
     }
 
     @DeleteMapping("/{id}")
-    public Optional<UserEntity> deleteUserById(@PathVariable int id) {
-        return userService.deleteUserById(id);
+    public ResponseEntity<Optional<UserEntity>> deleteUser(@PathVariable int id) {
+        return ResponseEntity.ok(userService.deleteUserById(id));
     }
 }

@@ -3,6 +3,7 @@ package com.vet.controllers;
 import com.vet.entities.pet.PetEntity;
 import com.vet.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -17,27 +18,27 @@ public class PetController {
     PetService petService;
 
     @GetMapping
-    public List<PetEntity> getAllPets() {
-        return petService.getAllPets();
+    public ResponseEntity<List<PetEntity>> getAllPets() {
+        return ResponseEntity.ok(petService.getAllPets());
     }
 
     @GetMapping("/{id}")
-    public Optional<PetEntity> getPetById(@PathVariable int id) {
-        return petService.getPetById(id);
+    public ResponseEntity<Optional<PetEntity>> getPetById(@PathVariable int id) {
+        return ResponseEntity.ok(petService.getPetById(id));
     }
 
     @PostMapping
-    public PetEntity savePet(@RequestBody PetEntity petEntity) throws ParseException {
-        return petService.savePet(petEntity);
+    public ResponseEntity<PetEntity> savePet(@RequestBody PetEntity petEntity) throws ParseException {
+        return ResponseEntity.ok(petService.savePet(petEntity));
     }
 
     @PutMapping("/{id}")
-    public Optional<PetEntity> editPet(@PathVariable int id, @RequestBody PetEntity petEntity) {
-        return petService.editPet(petEntity);
+    public ResponseEntity<Optional<PetEntity>> editPet(@RequestBody PetEntity petEntity) {
+        return ResponseEntity.ok(petService.editPet(petEntity));
     }
 
     @DeleteMapping("/{id}")
-    public Optional<PetEntity> deletePetById(@PathVariable int id) {
-        return petService.deletePetById(id);
+    public ResponseEntity<Optional<PetEntity>> deletePetById(@PathVariable int id) {
+        return ResponseEntity.ok(petService.deletePetById(id));
     }
 }

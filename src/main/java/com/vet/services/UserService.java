@@ -13,7 +13,7 @@ public interface UserService {
 
     public UserEntity saveUser(UserEntity userEntity);
 
-    public Optional<UserEntity> editUser(UserEntity userEntity);
+    public Optional<UserEntity> updateUser(UserEntity userEntity);
 
     public Optional<UserEntity> getUserById(int id);
 

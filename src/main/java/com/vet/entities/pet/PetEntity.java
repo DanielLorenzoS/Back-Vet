@@ -36,10 +36,10 @@ public class PetEntity {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date birthdate;
 
-    @NotNull @Size(max = 15)
+    @NotNull @Size(max = 40)
     private String specie;
 
-    @NotNull @Size(max = 15)
+    @NotNull @Size(max = 40)
     private String race;
 
     @NotNull @Size(max = 15)

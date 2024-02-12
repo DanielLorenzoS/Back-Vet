@@ -27,6 +27,12 @@ public class BillEntity {
     @JoinColumn(name = "bill_user_id")
     private UserEntity user;
 
+    @NotNull
+    private String concept;
+
+    @NotNull
+    private String invoiceNumber;
+
     @Past
     @NotNull
     @JsonFormat(pattern = "dd-MM-yyyy")

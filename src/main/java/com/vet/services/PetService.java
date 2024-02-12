@@ -8,13 +8,13 @@ import java.util.Optional;
 
 public interface PetService {
 
-    public List<PetEntity> getAllPets();
+    List<PetEntity> getAllPets();
 
-    public Optional<PetEntity> getPetById(int id);
+    Optional<PetEntity> getPetById(int id);
 
-    public PetEntity savePet(PetEntity petEntity) throws ParseException;
+    PetEntity savePet(PetEntity petEntity) throws ParseException;
 
-    public Optional<PetEntity> editPet(PetEntity petEntity);
+    Optional<PetEntity> editPet(PetEntity petEntity);
 
-    public Optional<PetEntity> deletePetById(int id);
+    Optional<PetEntity> deletePetById(int id);
 }
