@@ -37,7 +37,7 @@ public class BillServiceImpl implements BillService {
         }
     }
 
-    public Optional<BillEntity> deleteBill(Long id) {
+    public Optional<BillEntity> deleteBillById(Long id) {
         Optional<BillEntity> bill = billRepository.findById(id);
         if (bill.isPresent()) {
             billRepository.deleteById(id);

@@ -23,10 +23,10 @@ public class ProductEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull @Size(max = 20)
+    @NotNull @Size(max = 200)
     private String name;
 
-    @Size(max = 100)
+    @Size(max = 1000)
     private String description;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
@@ -37,26 +37,26 @@ public class ProductEntity {
 
     private float price;
 
-    @Size(max = 20)
+    @Size(max = 40)
     private String category;
 
-    @Size(max = 20)
+    @Size(max = 40)
     private String brand;
 
-    @Size(max = 20)
+    @Size(max = 60)
     private String provider;
 
     private int quantity;
 
     private boolean available;
 
-    @Size(max = 20)
+    @Size(max = 40)
     private String type;
 
-    @Size(max = 20)
+    @Size(max = 40)
     private String batchNumber;
 
-    @Size(max = 20)
+    @Size(max = 40)
     private String serialNumber;
 
     @Size(max = 255)
@@ -68,9 +68,4 @@ public class ProductEntity {
     @Size(max = 50)
     private String qrCode;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = BillEntity.class)
-    @JoinTable(name = "bill_products",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "bill_id"))
-    private List<BillEntity> bills;
 }

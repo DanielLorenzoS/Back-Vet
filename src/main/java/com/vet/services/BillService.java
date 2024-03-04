@@ -15,7 +15,7 @@ public interface BillService {
 
     Optional<BillEntity> updateBill(Long id, BillEntity bill);
 
-    Optional<BillEntity> deleteBill(Long id);
+    Optional<BillEntity> deleteBillById(Long id);
 
     List<BillEntity> getBillsByUserId(Long userId);
 

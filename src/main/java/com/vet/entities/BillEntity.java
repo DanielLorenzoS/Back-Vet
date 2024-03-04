@@ -1,6 +1,7 @@
 package com.vet.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -25,6 +26,7 @@ public class BillEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = UserEntity.class)
     @JoinColumn(name = "bill_user_id")
+    @JsonIgnore
     private UserEntity user;
 
     @NotNull
@@ -55,8 +57,9 @@ public class BillEntity {
     private String discount;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = ProductEntity.class)
-    @JoinTable(name = "bill_products",
+    @JoinTable(name = "bill_product",
             joinColumns = @JoinColumn(name = "bill_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
+    @JsonIgnore
     private List<ProductEntity> products;
 }
