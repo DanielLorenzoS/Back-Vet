@@ -3,6 +3,7 @@ package com.vet.controllers;
 import com.vet.entities.BillEntity;
 import com.vet.services.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,5 +46,15 @@ public class BillController {
     public ResponseEntity<Void> deleteBillById(@PathVariable int id) {
         billService.deleteBillById((long) id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<Page<BillEntity>> getBillsByFilter(
+            @RequestParam(required = false) String paymentMethod,
+            @RequestParam(required = false) String paymentStatus,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "createdAt,asc") String[] sort) {
+        return ResponseEntity.ok(billService.getAllBillsByFilter(paymentMethod, paymentStatus, page, size, sort));
     }
 }

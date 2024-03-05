@@ -1,9 +1,13 @@
 package com.vet.services.Impl;
 
 import com.vet.entities.BillEntity;
+import com.vet.entities.ProductEntity;
 import com.vet.repositories.BillRepository;
 import com.vet.services.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,4 +54,21 @@ public class BillServiceImpl implements BillService {
     public List<BillEntity> getBillsByUserId(Long userId) {
         return billRepository.getBillsByUserId(userId);
     }
+
+    public Page<BillEntity> getAllBillsByFilter(String paymentMethod,
+                                                      String paymentStatus,
+                                                      int page,
+                                                      int size,
+                                                      String[] sort) {
+        Sort sortable = Sort.by(sort[0]);
+        PageRequest pageable = PageRequest.of(page, size, sortable);
+        if (paymentMethod != null) {
+            return billRepository.getBillsByPaymentMethod(paymentMethod, pageable);
+        } else if (paymentStatus != null) {
+            return billRepository.getBillsByPaymentStatus(paymentStatus, pageable);
+        } else {
+            return billRepository.findAll(pageable);
+        }
+    }
+
 }

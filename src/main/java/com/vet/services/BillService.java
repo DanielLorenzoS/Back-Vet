@@ -1,6 +1,7 @@
 package com.vet.services;
 
 import com.vet.entities.BillEntity;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,5 +19,11 @@ public interface BillService {
     Optional<BillEntity> deleteBillById(Long id);
 
     List<BillEntity> getBillsByUserId(Long userId);
+
+    public Page<BillEntity> getAllBillsByFilter(String paymentMethod,
+                                                String paymentStatus,
+                                                int page,
+                                                int size,
+                                                String[] sort);
 
 }
