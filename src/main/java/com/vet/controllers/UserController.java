@@ -39,7 +39,6 @@ public class UserController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
             @RequestParam(defaultValue = "name,asc") String[] sort) {
-        System.out.println(sort[0] );
         return ResponseEntity.ok(userService.getAllUsersByFilter(name, lastName, email, phone, page, size, sort));
     }
 

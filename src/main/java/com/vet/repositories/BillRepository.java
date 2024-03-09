@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public interface BillRepository extends JpaRepository<BillEntity, Long> {
 
-    List<BillEntity> getBillsByUserId(Long userId);
+    Page<BillEntity> getBillEntitiesByUser_Name(String name, Pageable pageable);
 
-    Page<BillEntity> getBillsByPaymentMethod(String paymentMethod, Pageable pageable);
+    Page<BillEntity> getBillsByPaymentMethodStartingWith(String paymentMethod, Pageable pageable);
 
-    Page<BillEntity> getBillsByPaymentStatus(String paymentStatus, Pageable pageable);
+    Page<BillEntity> getBillsByPaymentStatusStartingWith(String paymentStatus, Pageable pageable);
 }

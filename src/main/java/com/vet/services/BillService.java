@@ -18,7 +18,10 @@ public interface BillService {
 
     Optional<BillEntity> deleteBillById(Long id);
 
-    List<BillEntity> getBillsByUserId(Long userId);
+    public Page<BillEntity> getBillsByUserId(String name,
+                                             int page,
+                                             int size,
+                                             String[] sort);
 
     public Page<BillEntity> getAllBillsByFilter(String paymentMethod,
                                                 String paymentStatus,

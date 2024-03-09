@@ -27,9 +27,12 @@ public class BillController {
         return ResponseEntity.ok(billService.getBillById((long) id));
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<List<BillEntity>> getBillsByUserId(@PathVariable int id) {
-        return ResponseEntity.ok(billService.getBillsByUserId((long) id));
+    @GetMapping("/user")
+    public ResponseEntity<Page<BillEntity>> getBillsByUserId(@RequestParam(required = false) String name,
+                                                             @RequestParam(defaultValue = "0") int page,
+                                                            @RequestParam(defaultValue = "5") int size,
+                                                            @RequestParam(defaultValue = "createdAt,asc") String[] sort) {
+        return ResponseEntity.ok(billService.getBillsByUserId(name, page, size, sort));
     }
 
     @PostMapping
