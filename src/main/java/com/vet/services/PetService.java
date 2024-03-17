@@ -1,6 +1,7 @@
 package com.vet.services;
 
 import com.vet.entities.pet.PetEntity;
+import org.springframework.data.domain.Page;
 
 import java.text.ParseException;
 import java.util.List;
@@ -17,4 +18,14 @@ public interface PetService {
     Optional<PetEntity> editPet(PetEntity petEntity);
 
     Optional<PetEntity> deletePetById(int id);
+
+    public Page<PetEntity> getAllPetsByFilter(String name,
+                                              String lastName,
+                                              String specie,
+                                              String race,
+                                              String sex,
+                                              int page,
+                                              int size,
+                                              String[] sort);
+
 }

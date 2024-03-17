@@ -3,6 +3,7 @@ package com.vet.controllers;
 import com.vet.entities.pet.PetEntity;
 import com.vet.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,5 +41,18 @@ public class PetController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Optional<PetEntity>> deletePetById(@PathVariable int id) {
         return ResponseEntity.ok(petService.deletePetById(id));
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<Page<PetEntity>> getAllPetsByFilter(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String specie,
+            @RequestParam(required = false) String race,
+            @RequestParam(required = false) String sex,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "name,asc") String[] sort) {
+        return ResponseEntity.ok(petService.getAllPetsByFilter(name, lastName, specie, race, sex, page, size, sort));
     }
 }
