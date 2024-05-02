@@ -1,8 +1,9 @@
-package com.vet.entities;
+package com.vet.entities.users;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.vet.entities.pet.PetEntity;
+import com.vet.entities.sales.BillEntity;
+import com.vet.entities.pets.PetEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;

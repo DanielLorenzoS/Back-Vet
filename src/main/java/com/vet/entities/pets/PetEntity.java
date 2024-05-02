@@ -1,8 +1,8 @@
-package com.vet.entities.pet;
+package com.vet.entities.pets;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.vet.entities.UserEntity;
+import com.vet.entities.users.UserEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;

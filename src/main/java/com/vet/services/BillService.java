@@ -1,6 +1,6 @@
 package com.vet.services;
 
-import com.vet.entities.BillEntity;
+import com.vet.entities.sales.BillEntity;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

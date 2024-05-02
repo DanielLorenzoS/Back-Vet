@@ -1,6 +1,6 @@
 package com.vet.repositories;
 
-import com.vet.entities.ProductEntity;
+import com.vet.entities.sales.ProductEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

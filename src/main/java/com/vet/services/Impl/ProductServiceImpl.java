@@ -1,7 +1,6 @@
 package com.vet.services.Impl;
 
-import com.vet.entities.ProductEntity;
-import com.vet.entities.UserEntity;
+import com.vet.entities.sales.ProductEntity;
 import com.vet.repositories.ProductRepository;
 import com.vet.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

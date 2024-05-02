@@ -1,13 +1,12 @@
 package com.vet.controllers;
 
-import com.vet.entities.UserEntity;
+import com.vet.entities.users.UserEntity;
 import com.vet.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController

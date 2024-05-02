@@ -1,7 +1,8 @@
-package com.vet.entities;
+package com.vet.entities.sales;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vet.entities.users.UserEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -18,14 +19,15 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name="bills")
-public class BillEntity {
+@Table(name="sales")
+public class SaleEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = UserEntity.class)
-    @JoinColumn(name = "bill_user_id")
+    @JoinColumn(name = "sale_user_id")
     @JsonIgnore
     private UserEntity user;
 
@@ -57,9 +59,16 @@ public class BillEntity {
     private String discount;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = ProductEntity.class)
-    @JoinTable(name = "bill_product",
-            joinColumns = @JoinColumn(name = "bill_id"),
+    @JoinTable(name = "sale_product",
+            joinColumns = @JoinColumn(name = "sale_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     @JsonIgnore
     private List<ProductEntity> products;
+
+    @NotNull
+    private String typeTax;
+
+    @NotNull
+    private String taxTotal;
+
 }

@@ -1,6 +1,6 @@
 package com.vet.services;
 
-import com.vet.entities.pet.PetEntity;
+import com.vet.entities.pets.PetEntity;
 import org.springframework.data.domain.Page;
 
 import java.text.ParseException;

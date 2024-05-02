@@ -1,10 +1,8 @@
 package com.vet.services;
 
-import com.vet.entities.UserEntity;
+import com.vet.entities.users.UserEntity;
 import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface UserService {

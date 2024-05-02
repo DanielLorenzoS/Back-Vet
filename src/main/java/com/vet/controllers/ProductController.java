@@ -1,6 +1,6 @@
 package com.vet.controllers;
 
-import com.vet.entities.ProductEntity;
+import com.vet.entities.sales.ProductEntity;
 import com.vet.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

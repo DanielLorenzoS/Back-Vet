@@ -1,4 +1,4 @@
-package com.vet.entities.pet;
+package com.vet.entities.pets;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

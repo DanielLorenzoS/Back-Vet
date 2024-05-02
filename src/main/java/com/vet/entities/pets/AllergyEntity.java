@@ -1,6 +1,5 @@
-package com.vet.entities.pet;
+package com.vet.entities.pets;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -9,27 +8,24 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name="medical_procedures")
-public class MedicalProcedureEntity {
+@Table(name="allergies")
+public class AllergyEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date procedureDate;
-
     @NotNull @Size(max = 20)
-    private String procedureType;
+    private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @NotNull @Size(max = 200)
+    private String description;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = HealthRecordsEntity.class)
     @JoinColumn(name = "health_records_id")
     private HealthRecordsEntity healthRecords;
-
 }

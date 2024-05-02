@@ -1,6 +1,6 @@
 package com.vet.services.Impl;
 
-import com.vet.entities.BillEntity;
+import com.vet.entities.sales.BillEntity;
 import com.vet.repositories.BillRepository;
 import com.vet.services.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
