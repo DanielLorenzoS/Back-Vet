@@ -1,6 +1,7 @@
 package com.vet.entities.users;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.vet.entities.sales.BillEntity;
 import com.vet.entities.pets.PetEntity;
@@ -43,7 +44,7 @@ public class UserEntity {
 
     private Integer number;
 
-    @NotNull @Size(max = 100)
+    @Size(max = 100)
     private String password;
 
     @NotNull @Size(max = 40)
@@ -60,11 +61,11 @@ public class UserEntity {
     private Date createdAt;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.MERGE)
-    @JsonManagedReference(value = "user-pets")
+    @JsonIgnore
     private List<PetEntity> pets;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference(value = "bill_user_id")
+    @JsonIgnore
     private List<BillEntity> bills;
 
 }

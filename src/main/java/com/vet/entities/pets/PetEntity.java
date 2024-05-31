@@ -2,6 +2,7 @@ package com.vet.entities.pets;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vet.entities.users.UserEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -56,7 +57,7 @@ public class PetEntity {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = UserEntity.class)
     @JoinColumn(name = "user_id")
-    @JsonBackReference(value = "user-pets")
+    @JsonIgnore
     private UserEntity user;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = HealthRecordsEntity.class)
