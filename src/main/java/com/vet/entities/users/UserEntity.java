@@ -56,6 +56,9 @@ public class UserEntity {
     @NotNull
     private boolean enabled;
 
+    @NotNull
+    private Integer idRole;
+
     @Past @NotNull
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date createdAt;
@@ -68,4 +71,8 @@ public class UserEntity {
     @JsonIgnore
     private List<BillEntity> bills;
 
+    @ManyToOne
+    @JoinColumn(name = "idRole", insertable = false, updatable = false)
+    @JsonManagedReference
+    private RoleEntity role;
 }
