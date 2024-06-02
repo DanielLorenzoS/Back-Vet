@@ -1,6 +1,7 @@
 package com.vet.entities.users;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,6 @@ public class RoleEntity {
 
     @OneToMany
     @JoinColumn(name = "idRole")
-    @JsonBackReference
+    @JsonIgnore
     private List<UserEntity> users;
 }

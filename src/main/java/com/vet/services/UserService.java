@@ -3,26 +3,24 @@ package com.vet.services;
 import com.vet.entities.users.UserEntity;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
 
-    public Page<UserEntity> getAllUsers(int page, int size, String[] sort);
+    Page<UserEntity> getAllUsers(int page, int size, String[] sort);
 
-    public UserEntity saveUser(UserEntity userEntity);
+    UserEntity saveUser(UserEntity userEntity);
 
-    public Optional<UserEntity> updateUser(UserEntity userEntity);
+    Optional<UserEntity> updateUser(UserEntity userEntity);
 
-    public Optional<UserEntity> getUserById(int id);
+    Optional<UserEntity> getUserById(int id);
 
-    public Optional<UserEntity> deleteUserById(int id);
+    Optional<UserEntity> deleteUserById(int id);
 
-    public Page<UserEntity> getAllUsersByFilter(String name,
-                                                                String lastName,
-                                                                String email,
-                                                                String phone,
-                                                                int page,
-                                                                int size,
-                                                                String[] sort);
+    Page<UserEntity> getAllUsersByFilter(String name, String lastName, String email,
+                                         String phone, int page, int size, String[] sort);
+
+    List<UserEntity> autoCompleteByNameAndByIdRole(String name, Integer idRole);
 
 }

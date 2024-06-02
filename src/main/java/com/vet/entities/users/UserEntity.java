@@ -73,6 +73,6 @@ public class UserEntity {
 
     @ManyToOne
     @JoinColumn(name = "idRole", insertable = false, updatable = false)
-    @JsonManagedReference
+    @JsonIgnore
     private RoleEntity role;
 }

@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -80,5 +81,9 @@ public class UserServiceImpl implements UserService {
         } else {
             return userRepository.findAll(pageable);
         }
+    }
+
+    public List<UserEntity> autoCompleteByNameAndByIdRole(String name, Integer idRole) {
+        return userRepository.findAllByNameStartingWithAndIdRole(name, idRole);
     }
 }

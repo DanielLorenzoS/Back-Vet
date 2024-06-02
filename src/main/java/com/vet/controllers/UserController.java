@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -39,6 +40,11 @@ public class UserController {
             @RequestParam(defaultValue = "5") int size,
             @RequestParam(defaultValue = "name,asc") String[] sort) {
         return ResponseEntity.ok(userService.getAllUsersByFilter(name, lastName, email, phone, page, size, sort));
+    }
+
+    @GetMapping("/autocomplete")
+    public ResponseEntity<List<UserEntity>> autoCompleteByName(@RequestParam String name, @RequestParam Integer idRole) {
+        return ResponseEntity.ok(userService.autoCompleteByNameAndByIdRole(name, idRole));
     }
 
     @PostMapping
