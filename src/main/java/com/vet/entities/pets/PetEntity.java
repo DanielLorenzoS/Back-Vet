@@ -46,7 +46,7 @@ public class PetEntity {
     @NotNull @Size(max = 15)
     private String color;
 
-    @NotNull @Column(unique = true)
+    @NotNull
     private float weight;
 
     @NotNull @Size(max = 10)
@@ -55,8 +55,8 @@ public class PetEntity {
     @NotNull @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private Date onRegister;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = UserEntity.class)
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = UserEntity.class)
+    @JoinColumn(name = "pet_user_id")
     @JsonIgnore
     private UserEntity user;
 

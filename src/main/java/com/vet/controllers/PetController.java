@@ -1,7 +1,12 @@
 package com.vet.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vet.entities.pets.PetEntity;
+import com.vet.entities.pets.vo.PetEntityVO;
+import com.vet.entities.users.UserEntity;
 import com.vet.services.PetService;
+import com.vet.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +21,10 @@ import java.util.Optional;
 public class PetController {
 
     @Autowired
-    PetService petService;
+    private PetService petService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public ResponseEntity<List<PetEntity>> getAllPets() {
@@ -28,8 +36,13 @@ public class PetController {
         return ResponseEntity.ok(petService.getPetById(id));
     }
 
+    @GetMapping("/petWithUser/{id}")
+    public ResponseEntity<Optional<PetEntityVO>> getPetWithUserById(@PathVariable int id) {
+        return ResponseEntity.ok(petService.getPetWithUserById(id));
+    }
+
     @PostMapping
-    public ResponseEntity<PetEntity> savePet(@RequestBody PetEntity petEntity) throws ParseException {
+    public ResponseEntity<PetEntity> savePet(@RequestBody PetEntityVO petEntity) throws ParseException {
         return ResponseEntity.ok(petService.savePet(petEntity));
     }
 
@@ -54,5 +67,10 @@ public class PetController {
             @RequestParam(defaultValue = "5") int size,
             @RequestParam(defaultValue = "name,asc") String[] sort) {
         return ResponseEntity.ok(petService.getAllPetsByFilter(name, lastName, specie, race, sex, page, size, sort));
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<PetEntity>> getPetsByUserId(@PathVariable Long userId) {
+        return ResponseEntity.ok(petService.getPetsByUserId(userId));
     }
 }

@@ -49,6 +49,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserEntity> addUser(@RequestBody UserEntity userEntity) {
+        System.out.println(userEntity.getIdRole());
         return ResponseEntity.ok(userService.saveUser(userEntity));
     }
 

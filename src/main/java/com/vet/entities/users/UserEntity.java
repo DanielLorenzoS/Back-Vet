@@ -63,7 +63,7 @@ public class UserEntity {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date createdAt;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<PetEntity> pets;
 

@@ -1,6 +1,7 @@
 package com.vet.services;
 
 import com.vet.entities.pets.PetEntity;
+import com.vet.entities.pets.vo.PetEntityVO;
 import org.springframework.data.domain.Page;
 
 import java.text.ParseException;
@@ -13,7 +14,9 @@ public interface PetService {
 
     Optional<PetEntity> getPetById(int id);
 
-    PetEntity savePet(PetEntity petEntity) throws ParseException;
+    Optional<PetEntityVO> getPetWithUserById(int id);
+
+    PetEntity savePet(PetEntityVO petEntity) throws ParseException;
 
     Optional<PetEntity> editPet(PetEntity petEntity);
 
@@ -28,4 +31,5 @@ public interface PetService {
                                               int size,
                                               String[] sort);
 
+    List<PetEntity> getPetsByUserId(Long userId);
 }

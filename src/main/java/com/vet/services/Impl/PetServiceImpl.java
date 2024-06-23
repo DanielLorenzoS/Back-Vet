@@ -1,8 +1,11 @@
 package com.vet.services.Impl;
 
 import com.vet.entities.pets.PetEntity;
+import com.vet.entities.pets.vo.PetEntityVO;
+import com.vet.entities.users.UserEntity;
 import com.vet.repositories.PetRepository;
 import com.vet.services.PetService;
+import com.vet.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +24,9 @@ public class PetServiceImpl implements PetService {
     @Autowired
     PetRepository petRepository;
 
+    @Autowired
+    private UserService userService;
+
     public List<PetEntity> getAllPets() {
         return petRepository.findAll();
     }
@@ -29,11 +35,43 @@ public class PetServiceImpl implements PetService {
         return Optional.ofNullable(petRepository.findById((long) id).orElse(null));
     }
 
-    public PetEntity savePet(PetEntity petEntity) throws ParseException {
+    public Optional<PetEntityVO> getPetWithUserById(int id) {
+        PetEntity pet = petRepository.findById((long) id).get();
+        PetEntityVO petVO = new PetEntityVO();
+        petVO.setId(pet.getId());
+        petVO.setName(pet.getName());
+        petVO.setLastName(pet.getLastName());
+        petVO.setSex(pet.getSex());
+        petVO.setBirthdate(pet.getBirthdate());
+        petVO.setSpecie(pet.getSpecie());
+        petVO.setRace(pet.getRace());
+        petVO.setColor(pet.getColor());
+        petVO.setWeight(pet.getWeight());
+        petVO.setSize(pet.getSize());
+        petVO.setOnRegister(pet.getOnRegister());
+        petVO.setUserId(pet.getUser().getId());
+        return Optional.of(petVO);
+    }
+
+    public PetEntity savePet(PetEntityVO petEntity) throws ParseException {
         Date date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
                 .parse(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()));
-        petEntity.setOnRegister(date);
-        return petRepository.save(petEntity);
+        PetEntity pet = new PetEntity();
+        Optional<UserEntity> user = Optional.of(new UserEntity());
+        user = userService.getUserById(Math.toIntExact(petEntity.getUserId()));
+        pet.setName(petEntity.getName());
+        pet.setLastName(petEntity.getLastName());
+        pet.setSex(petEntity.getSex());
+        pet.setBirthdate(petEntity.getBirthdate());
+        pet.setSpecie(petEntity.getSpecie());
+        pet.setRace(petEntity.getRace());
+        pet.setColor(petEntity.getColor());
+        pet.setWeight(petEntity.getWeight());
+        pet.setSize(petEntity.getSize());
+        pet.setOnRegister(petEntity.getOnRegister());
+
+        pet.setUser(user.get());
+        return petRepository.save(pet);
     }
 
     public Optional<PetEntity> editPet(PetEntity petEntity) {
@@ -65,13 +103,13 @@ public class PetServiceImpl implements PetService {
     }
 
     public Page<PetEntity> getAllPetsByFilter(String name,
-                                                String lastName,
-                                                String specie,
-                                                String race,
-                                                String sex,
-                                                int page,
-                                                int size,
-                                                String[] sort) {
+                                              String lastName,
+                                              String specie,
+                                              String race,
+                                              String sex,
+                                              int page,
+                                              int size,
+                                              String[] sort) {
         Sort sortable = Sort.by(sort[0]);
         PageRequest pageable = PageRequest.of(page, size, sortable);
         if (name != null) {
@@ -87,5 +125,9 @@ public class PetServiceImpl implements PetService {
         } else {
             return petRepository.findAll(pageable);
         }
+    }
+
+    public List<PetEntity> getPetsByUserId(Long userId) {
+        return petRepository.findByUserId(userId);
     }
 }
