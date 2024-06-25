@@ -45,21 +45,12 @@ public class ProductEntity {
     @Size(max = 60)
     private String provider;
 
-    private int quantity;
+    private int stock;
 
     private boolean available;
 
     @Size(max = 40)
     private String type;
-
-    @Size(max = 40)
-    private String batchNumber;
-
-    @Size(max = 40)
-    private String serialNumber;
-
-    @Size(max = 255)
-    private String notes;
 
     @Size(max = 50)
     private String barcode;
