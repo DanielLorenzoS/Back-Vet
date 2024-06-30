@@ -29,6 +29,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(userEntity);
     }
 
+    public List<UserEntity> saveAllUsers(List<UserEntity> userEntities) {
+        return userRepository.saveAll(userEntities);
+    }
+
     public Optional<UserEntity> updateUser(UserEntity userEntity) {
         Optional<UserEntity> user = userRepository.findById(userEntity.getId());
         if (user.isPresent()) {
@@ -61,12 +65,12 @@ public class UserServiceImpl implements UserService {
     }
 
     public Page<UserEntity> getAllUsersByFilter(String name,
-                                              String lastName,
-                                              String email,
-                                              String phone,
-                                              int page,
-                                              int size,
-                                              String[] sort) {
+                                                String lastName,
+                                                String email,
+                                                String phone,
+                                                int page,
+                                                int size,
+                                                String[] sort) {
         Sort sortable = Sort.by(sort[0]);
         PageRequest pageable = PageRequest.of(page, size, sortable);
         if (name != null) {

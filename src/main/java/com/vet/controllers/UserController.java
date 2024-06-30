@@ -53,6 +53,11 @@ public class UserController {
         return ResponseEntity.ok(userService.saveUser(userEntity));
     }
 
+    @PostMapping("/all")
+    public ResponseEntity<List<UserEntity>> addAllUsers(@RequestBody List<UserEntity> userEntities) {
+        return ResponseEntity.ok(userService.saveAllUsers(userEntities));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<UserEntity> updateUser(@PathVariable int id, @RequestBody UserEntity userEntity) {
         return ResponseEntity.ok(userService.updateUser(userEntity).get());

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -72,6 +73,31 @@ public class PetServiceImpl implements PetService {
 
         pet.setUser(user.get());
         return petRepository.save(pet);
+    }
+
+    public List<PetEntity> saveAllPets(List<PetEntityVO> petEntities) throws ParseException {
+        Date date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
+                .parse(new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date()));
+        Optional<UserEntity> user = Optional.of(new UserEntity());
+        List<PetEntity> pets = new ArrayList<>();
+        for (PetEntityVO petEntity : petEntities) {
+            PetEntity pet = new PetEntity();
+            System.out.println(petEntity.getUserId());
+            user = userService.getUserById(Math.toIntExact(petEntity.getUserId()));
+            pet.setName(petEntity.getName());
+            pet.setLastName(petEntity.getLastName());
+            pet.setSex(petEntity.getSex());
+            pet.setBirthdate(petEntity.getBirthdate());
+            pet.setSpecie(petEntity.getSpecie());
+            pet.setRace(petEntity.getRace());
+            pet.setColor(petEntity.getColor());
+            pet.setWeight(petEntity.getWeight());
+            pet.setSize(petEntity.getSize());
+            pet.setOnRegister(petEntity.getOnRegister());
+            pet.setUser(user.get());
+            pets.add(pet);
+        }
+        return petRepository.saveAll(pets);
     }
 
     public Optional<PetEntity> editPet(PetEntity petEntity) {

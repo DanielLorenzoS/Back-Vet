@@ -45,6 +45,12 @@ public class PetController {
     public ResponseEntity<PetEntity> savePet(@RequestBody PetEntityVO petEntity) throws ParseException {
         return ResponseEntity.ok(petService.savePet(petEntity));
     }
+    
+    @PostMapping("/all")
+    public ResponseEntity<List<PetEntity>> saveAllPets(@RequestBody List<PetEntityVO> petEntities) throws ParseException {
+        System.out.println(petEntities.get(0).getName());
+        return ResponseEntity.ok(petService.saveAllPets(petEntities));
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Optional<PetEntity>> editPet(@RequestBody PetEntity petEntity) {

@@ -18,6 +18,8 @@ public interface PetService {
 
     PetEntity savePet(PetEntityVO petEntity) throws ParseException;
 
+    List<PetEntity> saveAllPets(List<PetEntityVO> petEntities) throws ParseException;
+
     Optional<PetEntity> editPet(PetEntity petEntity);
 
     Optional<PetEntity> deletePetById(int id);

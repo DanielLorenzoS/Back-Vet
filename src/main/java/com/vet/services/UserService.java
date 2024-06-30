@@ -12,6 +12,8 @@ public interface UserService {
 
     UserEntity saveUser(UserEntity userEntity);
 
+    List<UserEntity> saveAllUsers(List<UserEntity> userEntities);
+
     Optional<UserEntity> updateUser(UserEntity userEntity);
 
     Optional<UserEntity> getUserById(int id);
