@@ -19,6 +19,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     Page<UserEntity> findAllByLastNameStartingWith(String lastName, Pageable pageable);
 
+    Page<UserEntity> findAllByIdRole(Integer idRole, Pageable pageable);
+
     List<UserEntity> findAllByNameStartingWithAndIdRole(String name, Integer idRole);
 
 }

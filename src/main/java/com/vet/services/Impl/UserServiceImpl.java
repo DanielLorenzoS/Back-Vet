@@ -68,6 +68,7 @@ public class UserServiceImpl implements UserService {
                                                 String lastName,
                                                 String email,
                                                 String phone,
+                                                Integer idRole,
                                                 int page,
                                                 int size,
                                                 String[] sort) {
@@ -82,6 +83,8 @@ public class UserServiceImpl implements UserService {
             return userRepository.findAllByEmailStartingWith(email, pageable);
         } else if (phone != null) {
             return userRepository.findAllByPhoneStartingWith(phone, pageable);
+        } else if (idRole != null) {
+            return userRepository.findAllByIdRole(idRole, pageable);
         } else {
             return userRepository.findAll(pageable);
         }

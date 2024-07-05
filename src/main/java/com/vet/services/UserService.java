@@ -21,7 +21,7 @@ public interface UserService {
     Optional<UserEntity> deleteUserById(int id);
 
     Page<UserEntity> getAllUsersByFilter(String name, String lastName, String email,
-                                         String phone, int page, int size, String[] sort);
+                                         String phone, Integer idRole, int page, int size, String[] sort);
 
     List<UserEntity> autoCompleteByNameAndByIdRole(String name, Integer idRole);
 

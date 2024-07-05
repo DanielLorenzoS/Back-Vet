@@ -36,10 +36,11 @@ public class UserController {
             @RequestParam(required = false) String lastName,
             @RequestParam(required = false) String email,
             @RequestParam(required = false) String phone,
+            @RequestParam(required = false) Integer idRole,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
             @RequestParam(defaultValue = "name,asc") String[] sort) {
-        return ResponseEntity.ok(userService.getAllUsersByFilter(name, lastName, email, phone, page, size, sort));
+        return ResponseEntity.ok(userService.getAllUsersByFilter(name, lastName, email, phone, idRole, page, size, sort));
     }
 
     @GetMapping("/autocomplete")

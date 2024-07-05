@@ -24,9 +24,6 @@ public class RoleEntity {
 
     private String name;
 
-    @Size(max = 100)
-    private String description;
-
     @OneToMany
     @JoinColumn(name = "idRole")
     @JsonIgnore
