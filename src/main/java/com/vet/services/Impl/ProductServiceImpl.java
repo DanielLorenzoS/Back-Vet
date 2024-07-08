@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,6 +21,10 @@ public class ProductServiceImpl implements ProductService {
 
     public ProductEntity saveProduct(ProductEntity productEntity) {
         return productRepository.save(productEntity);
+    }
+
+    public List<ProductEntity> saveProducts(List<ProductEntity> productEntities) {
+        return productRepository.saveAll(productEntities);
     }
 
     public ProductEntity editProduct(ProductEntity productEntity) {
@@ -44,18 +50,21 @@ public class ProductServiceImpl implements ProductService {
                                                 int page,
                                                 int size,
                                                 String[] sort) {
+        Page<ProductEntity> listProducts;
         Sort sortable = Sort.by(sort[0]);
         PageRequest pageable = PageRequest.of(page, size, sortable);
+
         if (name != null) {
-            return productRepository.findAllByNameStartingWith(name, pageable);
+            listProducts = productRepository.findAllByNameStartingWith(name, pageable);
         } else if (provider != null) {
-            return productRepository.findAllByProviderStartingWith(provider, pageable);
+            listProducts = productRepository.findAllByProviderStartingWith(provider, pageable);
         } else if (type != null) {
-            return productRepository.findAllByTypeStartingWith(type, pageable);
+            listProducts = productRepository.findAllByTypeStartingWith(type, pageable);
         } else if (category != null) {
-            return productRepository.findAllByCategoryStartingWith(category, pageable);
+            listProducts = productRepository.findAllByCategoryStartingWith(category, pageable);
         } else {
-            return productRepository.findAll(pageable);
+            listProducts = productRepository.findAll(pageable);
         }
+        return listProducts;
     }
 }

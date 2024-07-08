@@ -14,7 +14,8 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    ProductService productService;
+    private ProductService productService;
+
     @GetMapping
     public ResponseEntity<List<ProductEntity>> getAllProducts() {
         return ResponseEntity.ok(productService.getAllProducts());
@@ -35,6 +36,11 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<ProductEntity> saveProduct(@RequestBody ProductEntity productEntity) {
         return ResponseEntity.ok(productService.saveProduct(productEntity));
+    }
+
+    @PostMapping("/all")
+    public ResponseEntity<List<ProductEntity>> saveProducts(@RequestBody List<ProductEntity> productEntities) {
+        return ResponseEntity.ok(productService.saveProducts(productEntities));
     }
 
     @PutMapping("/{id}")

@@ -9,6 +9,8 @@ public interface ProductService {
 
     ProductEntity saveProduct(ProductEntity productEntity);
 
+    List<ProductEntity> saveProducts(List<ProductEntity> productEntities);
+
     ProductEntity editProduct(ProductEntity productEntity);
 
     void deleteProductById(int id);
