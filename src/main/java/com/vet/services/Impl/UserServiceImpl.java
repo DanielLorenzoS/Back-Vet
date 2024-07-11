@@ -75,7 +75,6 @@ public class UserServiceImpl implements UserService {
         Sort sortable = Sort.by(sort[0]);
         PageRequest pageable = PageRequest.of(page, size, sortable);
         if (name != null) {
-            System.out.println(userRepository.findAllByNameStartingWith(name, pageable));
             return userRepository.findAllByNameStartingWith(name, pageable);
         } else if (lastName != null) {
             return userRepository.findAllByLastNameStartingWith(lastName, pageable);
