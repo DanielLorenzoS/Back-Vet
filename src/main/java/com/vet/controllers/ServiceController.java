@@ -13,8 +13,11 @@ import java.util.List;
 @RequestMapping("/service")
 public class ServiceController {
 
-    @Autowired
-    private ServiceService serviceService;
+    private final ServiceService serviceService;
+
+    public ServiceController(ServiceService serviceService) {
+        this.serviceService = serviceService;
+    }
 
     @GetMapping
     public List<ServiceEntity> findAllServices() {

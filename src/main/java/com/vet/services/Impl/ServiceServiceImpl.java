@@ -15,8 +15,11 @@ import java.util.Optional;
 @Service
 public class ServiceServiceImpl implements ServiceService {
 
-    @Autowired
-    private ServiceRepository serviceRepository;
+    private final ServiceRepository serviceRepository;
+
+    public ServiceServiceImpl(ServiceRepository serviceRepository) {
+        this.serviceRepository = serviceRepository;
+    }
 
     public List<ServiceEntity> findAllServices() {
         return serviceRepository.findAll();

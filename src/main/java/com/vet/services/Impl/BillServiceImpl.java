@@ -15,8 +15,11 @@ import java.util.Optional;
 @Service
 public class BillServiceImpl implements BillService {
 
-    @Autowired
-    BillRepository billRepository;
+    private final BillRepository billRepository;
+
+    public BillServiceImpl(BillRepository billRepository) {
+        this.billRepository = billRepository;
+    }
 
     public List<BillEntity> getAllBills() {
         return billRepository.findAll();

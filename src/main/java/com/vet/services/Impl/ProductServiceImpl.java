@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -31,12 +32,18 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.save(productEntity);
     }
 
-    public void deleteProductById(int id) {
-        productRepository.deleteById(id);
+    public Optional<ProductEntity> deleteProductById(int id) {
+        Optional<ProductEntity> product = productRepository.findById(id);
+        if (product.isPresent()) {
+            productRepository.deleteById(id);
+            return product;
+        } else {
+            return Optional.empty();
+        }
     }
 
-    public ProductEntity getProductById(int id) {
-        return productRepository.findById(id).get();
+    public Optional<ProductEntity> getProductById(int id) {
+        return productRepository.findById(id);
     }
 
     public List<ProductEntity> getAllProducts() {

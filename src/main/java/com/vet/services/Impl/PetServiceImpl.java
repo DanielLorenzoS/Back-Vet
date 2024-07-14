@@ -6,7 +6,7 @@ import com.vet.entities.users.UserEntity;
 import com.vet.repositories.PetRepository;
 import com.vet.services.PetService;
 import com.vet.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -19,39 +19,46 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class PetServiceImpl implements PetService {
 
-    @Autowired
-    PetRepository petRepository;
+    private final PetRepository petRepository;
+    private final UserService userService;
 
-    @Autowired
-    private UserService userService;
+    public PetServiceImpl(PetRepository petRepository, UserService userService) {
+        this.petRepository = petRepository;
+        this.userService = userService;
+    }
 
     public List<PetEntity> getAllPets() {
         return petRepository.findAll();
     }
 
     public Optional<PetEntity> getPetById(int id) {
-        return Optional.ofNullable(petRepository.findById((long) id).orElse(null));
+        return petRepository.findById((long) id);
     }
 
     public Optional<PetEntityVO> getPetWithUserById(int id) {
-        PetEntity pet = petRepository.findById((long) id).get();
+        Optional<PetEntity> pet = petRepository.findById((long) id);
         PetEntityVO petVO = new PetEntityVO();
-        petVO.setId(pet.getId());
-        petVO.setName(pet.getName());
-        petVO.setLastName(pet.getLastName());
-        petVO.setSex(pet.getSex());
-        petVO.setBirthdate(pet.getBirthdate());
-        petVO.setSpecie(pet.getSpecie());
-        petVO.setRace(pet.getRace());
-        petVO.setColor(pet.getColor());
-        petVO.setWeight(pet.getWeight());
-        petVO.setSize(pet.getSize());
-        petVO.setOnRegister(pet.getOnRegister());
-        petVO.setUserId(pet.getUser().getId());
-        return Optional.of(petVO);
+        if (pet.isPresent()) {
+            petVO.setId(pet.get().getId());
+            petVO.setName(pet.get().getName());
+            petVO.setLastName(pet.get().getLastName());
+            petVO.setSex(pet.get().getSex());
+            petVO.setBirthdate(pet.get().getBirthdate());
+            petVO.setSpecie(pet.get().getSpecie());
+            petVO.setRace(pet.get().getRace());
+            petVO.setColor(pet.get().getColor());
+            petVO.setWeight(pet.get().getWeight());
+            petVO.setSize(pet.get().getSize());
+            petVO.setOnRegister(pet.get().getOnRegister());
+            petVO.setUserId(pet.get().getUser().getId());
+            return Optional.of(petVO);
+        } else {
+            return Optional.empty();
+        }
     }
 
     public PetEntity savePet(PetEntityVO petEntity) throws ParseException {

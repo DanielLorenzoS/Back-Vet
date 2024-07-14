@@ -1,13 +1,9 @@
 package com.vet.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vet.entities.pets.PetEntity;
 import com.vet.entities.pets.vo.PetEntityVO;
-import com.vet.entities.users.UserEntity;
 import com.vet.services.PetService;
 import com.vet.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +16,13 @@ import java.util.Optional;
 @RequestMapping("/pet")
 public class PetController {
 
-    @Autowired
-    private PetService petService;
+    private final PetService petService;
+    private final UserService userService;
 
-    @Autowired
-    private UserService userService;
+    public PetController(PetService petService, UserService userService) {
+        this.petService = petService;
+        this.userService = userService;
+    }
 
     @GetMapping
     public ResponseEntity<List<PetEntity>> getAllPets() {

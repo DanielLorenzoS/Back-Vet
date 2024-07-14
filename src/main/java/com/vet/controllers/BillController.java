@@ -14,8 +14,11 @@ import java.util.Optional;
 @RequestMapping("/bill")
 public class BillController {
 
-    @Autowired
-    BillService billService;
+    private final BillService billService;
+
+    public BillController(BillService billService) {
+        this.billService = billService;
+    }
 
     @GetMapping
     public ResponseEntity<List<BillEntity>> getAllBills() {

@@ -4,6 +4,7 @@ import com.vet.entities.sales.ProductEntity;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductService {
 
@@ -13,9 +14,9 @@ public interface ProductService {
 
     ProductEntity editProduct(ProductEntity productEntity);
 
-    void deleteProductById(int id);
+    Optional<ProductEntity> deleteProductById(int id);
 
-    ProductEntity getProductById(int id);
+    Optional<ProductEntity> getProductById(int id);
 
     List<ProductEntity> getAllProducts();
 

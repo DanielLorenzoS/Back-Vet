@@ -3,7 +3,6 @@ package com.vet.services.Impl;
 import com.vet.entities.users.UserEntity;
 import com.vet.repositories.UserRepository;
 import com.vet.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,8 +14,11 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public Page<UserEntity> getAllUsers(int page, int size, String[] sort) {
         Sort sortable = Sort.by(sort[0]);
